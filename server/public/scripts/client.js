@@ -12,7 +12,7 @@ function onReady(){
     loadSetUp();
     $('.container').on('click', '.difficulty', difficultyLevelPicked);
     $('.container').on('click', '#start', startBtnClicked);
-
+    $('.container').on('click', '#submitBtn', submitGuesses);
 }
 
 //loads the setup mode
@@ -73,20 +73,30 @@ function startBtnClicked(){
       return players;
   }
 
-
-  //POST request
-//  $.ajax({
-//      method: 'POST', //type of request
-//      url: '/number', //route that I will match on (needs to be same in server.js)
-//      data: objToSend
-//  }).done(function(response){
-//      console.log('response from POST request', response);
-//      //normally would call function that makes GET request here...
-//  }).fail(function(error){
-//      console.log('something went wrong in POST request', error);
-     
-//  });
-
+  function submitGuesses(){
+      //create object that contains max number and player guesses
+      var objToSend = {
+          max: max,
+          player1: parseInt($('#input1').val()),
+          player2: parseInt($('#input2').val()),
+          player3: parseInt($('#input3').val()),
+          player4: parseInt($('#input4').val())
+      }
+      console.log('testing player1 in obj:', objToSend.player1, 'and', objToSend.max);
+      //clear input fields
+      $('.playerInput').val('');
+      //POST request
+      $.ajax({
+          method: 'POST',
+          url: '/number', //the route that I will match on (needs to be same as the require's corresponding app.use in server.js)
+          data: objToSend
+      }).done(function(response){
+          console.log('response from POST req:', response);
+          //will call function for GET request here
+      }).fail(function(error){
+          console.log('something went wrong in POST req:', error);
+      });
+  } //END submitGuesses
 
 //GET request
 // $.ajax({
