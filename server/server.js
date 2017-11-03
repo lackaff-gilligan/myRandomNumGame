@@ -8,8 +8,13 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 var numberRouter = require('./routes/number_router.js');
 app.use('/number', numberRouter);
+
+// var guessesRouter = require('./routes/guesses_router.js');
+// app.use('/guesses', guessesRouter);
+
 //share static files in the public folder
 app.use(express.static('server/public'));
+
 //start up server
 app.listen(port, function(){
     console.log('server running on port:', port);

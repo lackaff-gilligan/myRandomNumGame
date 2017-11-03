@@ -43,10 +43,26 @@ function difficultyLevelPicked(){
 }
 
 function startBtnClicked(){
+    var maxValToSend = {
+        max: max
+        //diffLevel: diffLevel
+    };
+    //POST request of max value
+    $.ajax({
+        method: 'POST',
+        url: '/number',
+        data: maxValToSend
+    }).done(function(response){
+        console.log('success in POST /number req', response);
+        //would call function for GET here normally
+    }).fail(function(error){
+        console.log('POST request for /number failed', error);
+    })
     //clear the container div of loadSetUp()
     $('.container').empty();
     //call function that appends play mode to the DOM
-    playMode();
+    playMode(); //move this up to .done(???)
+    
   }
 
   //create play mode of game
@@ -74,27 +90,29 @@ function startBtnClicked(){
   }
 
   function submitGuesses(){
+      //add 1 to guess tracker
+      guessesMade += 1;
       //create object that contains max number and player guesses
       var objToSend = {
-          max: max,
+          guessesMade: guessesMade,
           player1: parseInt($('#input1').val()),
           player2: parseInt($('#input2').val()),
           player3: parseInt($('#input3').val()),
           player4: parseInt($('#input4').val())
       }
-      console.log('testing player1 in obj:', objToSend.player1, 'and', objToSend.max);
+      console.log('testing player1 in obj:', objToSend.player1, 'and', objToSend.guessesMade);
       //clear input fields
       $('.playerInput').val('');
       //POST request
       $.ajax({
           method: 'POST',
-          url: '/number', //the route that I will match on (needs to be same as the require's corresponding app.use in server.js)
+          url: '/guesses', //the route that I will match on (needs to be same as the require's corresponding app.use in server.js)
           data: objToSend
       }).done(function(response){
           console.log('response from POST req:', response);
           //will call function for GET request here
       }).fail(function(error){
-          console.log('something went wrong in POST req:', error);
+          console.log('something went wrong in POST req for /guesses:', error);
       });
   } //END submitGuesses
 

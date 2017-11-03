@@ -1,10 +1,5 @@
-//returns a random number between 1 and the argument it's passed
-function randomNumber(maxNum) {
-    return Math.floor(Math.random() * maxNum ) + 1;
-}
-
 //compares a given number with four other different numbers, checks if any match
-function compareGuesses(randomNum, guess1, guess2, guess3, guess4){
+function checkGuesses(randomNum, guess1, guess2, guess3, guess4){
     var result;
     if(randomNum === guess1){
         result = 'Player 1 WINS!!!';
@@ -20,7 +15,4 @@ function compareGuesses(randomNum, guess1, guess2, guess3, guess4){
     return result;
 }
 
-module.exports = {
-    randomNumber: randomNumber,
-    compareGuesses: compareGuesses
-};
+module.exports = checkGuesses;
