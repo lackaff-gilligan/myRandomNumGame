@@ -1,6 +1,9 @@
 var express = require('express');
 var router = express.Router();
 
+//router.use() -- what is this? Do I need it? How do I get multiple POSTs going to 
+// this same router?? What are the url's? /number, /number/guesses ?????
+
 //randomNumber holds whatever the corresponding module is set to share 
 //(in this case it's a function)
 var randomNumber = require('../modules/random_number.js'); 
@@ -14,8 +17,8 @@ var guessRounds = [];
 //will hold maximum number in guessing range (associated with difficulty level picked by users)
 var max;
 
-//will hold current game's random number the players are trying to guess
-var currentRandomNum;
+//will hold current game's generated random number that players are trying to guess
+var generatedRandomNum;
 
 //will hold each player's guess
 var p1Guess;
@@ -28,7 +31,9 @@ router.post('/', function(req, res){
     max = req.body.max;
     console.log('req.body is now max:', max);
     //call function to generate random number within chosen difficulty range
-    currentRandomNum = randomNumber(max);
+    generatedRandomNum = randomNumber(max);
+    console.log('this round\'s generatedRandomNum', generatedRandomNum);
+    
     res.sendStatus(201);
 });
 
@@ -41,6 +46,7 @@ router.post('/guesses', function(req, res){
     p2Guess = playerGuesses.player2;
     p3Guess = playerGuesses.player3;
     p4Guess = playerGuesses.player4;
+
     res.sendStatus(201);
 });
 

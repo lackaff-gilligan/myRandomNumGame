@@ -7,10 +7,7 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended: true}));
 
 var numberRouter = require('./routes/number_router.js');
-app.use('/number', numberRouter);
-
-// var guessesRouter = require('./routes/guesses_router.js');
-// app.use('/guesses', guessesRouter);
+app.use('/number/guesses', numberRouter);
 
 //share static files in the public folder
 app.use(express.static('server/public'));

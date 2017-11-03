@@ -31,19 +31,19 @@ function loadSetUp(){
 
 //sets and stores difficulty level and max guess value
 function difficultyLevelPicked(){
-    diffLevel = $(this).attr('id');
+    diffLevel = $(this).text();
     console.log('diffLevel:', diffLevel);
-    if(diffLevel === 'easy') {
-        max = 10;
-    } else if(diffLevel === 'medium') {
+    if(diffLevel === 'EASY') {
         max = 25;
-    } else if(diffLevel === 'hard'){
-        max = 40;
+    } else if(diffLevel === 'MEDIUM') {
+        max = 50;
+    } else if(diffLevel === 'HARD'){
+        max = 100;
     }
 }
 
 function startBtnClicked(){
-    var maxValToSend = {
+    var maxNumToSend = {
         max: max
         //diffLevel: diffLevel
     };
@@ -51,17 +51,17 @@ function startBtnClicked(){
     $.ajax({
         method: 'POST',
         url: '/number',
-        data: maxValToSend
+        data: maxNumToSend
     }).done(function(response){
         console.log('success in POST /number req', response);
-        //would call function for GET here normally
+        //call function that appends play mode to the DOM
+       playMode();
     }).fail(function(error){
         console.log('POST request for /number failed', error);
     })
     //clear the container div of loadSetUp()
     $('.container').empty();
-    //call function that appends play mode to the DOM
-    playMode(); //move this up to .done(???)
+     //move this up to .done(???)
     
   }
 
@@ -106,7 +106,8 @@ function startBtnClicked(){
       //POST request
       $.ajax({
           method: 'POST',
-          url: '/guesses', //the route that I will match on (needs to be same as the require's corresponding app.use in server.js)
+          //TODO I don't know what the url should be if I want multiple POSTs going to same router????
+          url: '/number/guesses', //the route that I will match on (needs to be same as the require's corresponding app.use in server.js)
           data: objToSend
       }).done(function(response){
           console.log('response from POST req:', response);
