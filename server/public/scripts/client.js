@@ -50,10 +50,10 @@ function startBtnClicked(){
     //POST request of max value
     $.ajax({
         method: 'POST',
-        url: '/number',
+        url: '/number', //must match the route on the server
         data: maxNumToSend
     }).done(function(response){
-        console.log('success in POST /number req', response);
+        console.log('successful response from POST request /number', response);
         //call function that appends play mode to the DOM
        playMode();
     }).fail(function(error){
@@ -106,11 +106,10 @@ function startBtnClicked(){
       //POST request
       $.ajax({
           method: 'POST',
-          //TODO I don't know what the url should be if I want multiple POSTs going to same router????
-          url: '/number/guesses', //the route that I will match on (needs to be same as the require's corresponding app.use in server.js)
+          url: '/number/guesses/', //the route that I will match on (needs to be same as the require's corresponding app.use in server.js)
           data: objToSend
       }).done(function(response){
-          console.log('response from POST req:', response);
+          console.log('successful response from POST req /number/guesses/', response);
           //will call function for GET request here
       }).fail(function(error){
           console.log('something went wrong in POST req for /guesses:', error);
