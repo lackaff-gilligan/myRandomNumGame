@@ -7,9 +7,9 @@ function checkGuesses(randomNum, guess1, guess2, guess3, guess4){
     var resultObj = {};
     for (var i = 0; i < guesses.length; i += 1) {
         if(guesses[i] > randomNum){
-          playerMsg = 'Too high';
+          playerMsg = 'too high';
         } else if(guesses[i] < randomNum){
-            playerMsg = 'Too low';
+            playerMsg = 'too low';
         } else if(guesses[i] === randomNum) {
             playerMsg = 'CORRECT!';
             gameMsg = 'PLAYER ' + (i + 1) + ' WINS!!!';

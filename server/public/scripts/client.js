@@ -70,6 +70,7 @@ function startBtnClicked(){
       $playMode.append('<h2 id="difficultyDisp">Difficulty Level: ' + diffLevel + '</h2>');
       $playMode.append('<h3 id="guessRange">Number is between 1 and ' + max + '</h3>');
       $playMode.append('<h3>Guesses made: <span id="guessesMade">0</span></h3>');
+      $playMode.append('<h2 id="gameMsg">Should this show from start?</h2>');
       var playerInputs = createPlayerInputs();
       $playMode.append(playerInputs);
       $playMode.append('<button type="submit" id="submitBtn">Submit Guesses</button>');
@@ -130,9 +131,19 @@ function startBtnClicked(){
       });
   } //END getResults
 
-  function appendResults(guessingResults) {
-      //include $('#guessesMade').text(guessesMade);
-      console.log('in appendResults, being passed:', guessingResults);
+  function appendResults(receivedResults) {
+      console.log('in appendResults, being passed:', receivedResults);
+      //message displayed after guessing round
+      var dispMsg = receivedResults.currentRound.gameMsg;
+      //array of player's too high/low messages (objects)
+      var playerDetails = receivedResults.currentRound.guessResults;
+      console.log('playerDetails: ', playerDetails);
+      for (var i = 0; i < playerDetails.length; i += 1) {
+          $('#lastGuess' + (i + 1)).text(playerDetails[i].playerMsg);
+      }
+      //update guesses made tracker
+      $('#guessesMade').text(guessesMade);
+      $('#gameMsg').text(dispMsg);
   }//end appendResults
   
 
