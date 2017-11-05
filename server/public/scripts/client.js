@@ -95,24 +95,24 @@ function startBtnClicked(){
       //create object that contains max number and player guesses
       var objToSend = {
           guessesMade: guessesMade,
-          player1: parseInt($('#input1').val()),
-          player2: parseInt($('#input2').val()),
-          player3: parseInt($('#input3').val()),
-          player4: parseInt($('#input4').val())
+          player1: $('#input1').val(),
+          player2: $('#input2').val(),
+          player3: $('#input3').val(),
+          player4: $('#input4').val()
       }
-      console.log('testing player1 in obj:', objToSend.player1, 'and', objToSend.guessesMade);
+      console.log('testing player1 and guessesMade in obj:', objToSend.player1, 'and', objToSend.guessesMade);
       //clear input fields
       $('.playerInput').val('');
       //POST request
       $.ajax({
           method: 'POST',
-          url: '/number/guesses/', //the route that I will match on (needs to be same as the require's corresponding app.use in server.js)
+          url: '/number/guesses/', //will be '/guesses' in corresponding POST route (number_router.js)
           data: objToSend
       }).done(function(response){
           console.log('successful response from POST req /number/guesses/', response);
           //will call function for GET request here
       }).fail(function(error){
-          console.log('something went wrong in POST req for /guesses:', error);
+          console.log('something went wrong in POST req for /number/guesses/', error);
       });
   } //END submitGuesses
 
