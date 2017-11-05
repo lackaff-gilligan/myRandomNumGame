@@ -8,20 +8,17 @@ var randomNumber = require('../modules/random_number.js');
 //holds the function checkGuesses from corresponding module
 var checkGuesses = require('../modules/check_guesses.js');
 
-//will store each round of guesses
+//store each round of players' guesses
 var guessRounds = [];
 
-//will hold maximum number in guessing range (associated with difficulty level picked by users)
+//maximum number in current guessing range (associated with difficulty level picked by users)
 var max;
 
-//will hold current game's generated random number that players are trying to guess
+//current game's generated random number that players are trying to guess
 var generatedRandomNum;
 
-//will hold each player's guess
-// var p1Guess;
-// var p2Guess;
-// var p3Guess;
-// var p4Guess;
+//this round's results (whether or not someone won, each player )
+var currentRound;
 
 //POST ROUTE, http://localhost:5000/number will go here
 router.post('/', function(req, res){
@@ -48,10 +45,16 @@ router.post('/guesses', function(req, res){
     console.log('p3Guess:', p3Guess);
     
     console.log('generatedRandomNum at this point:', generatedRandomNum);
-    
-    console.log(checkGuesses(generatedRandomNum, p1Guess, p2Guess, p3Guess, p4Guess));
+    currentRound = checkGuesses(generatedRandomNum, p1Guess, p2Guess, p3Guess, p4Guess); 
+    console.log(currentRound);
     res.sendStatus(201);
 });
 
+//GET ROUTE
+router.get('/', function(req, res){
+    console.log('GET request for guess results was made');
+    //send back current round results and all of past round player guesses
+    res.send({currentRound: currentRound, guessRounds: guessRounds});
+})
 
 module.exports = router;

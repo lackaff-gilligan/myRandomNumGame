@@ -61,8 +61,7 @@ function startBtnClicked(){
     })
     //clear the container div of loadSetUp()
     $('.container').empty();
-     //move this up to .done(???)
-    
+     
   }
 
   //create play mode of game
@@ -70,7 +69,7 @@ function startBtnClicked(){
       var $playMode = $('<div id="playMode"></div>');
       $playMode.append('<h2 id="difficultyDisp">Difficulty Level: ' + diffLevel + '</h2>');
       $playMode.append('<h3 id="guessRange">Number is between 1 and ' + max + '</h3>');
-      $playMode.append('<h3>Guesses made: ' + guessesMade + '</h3>');
+      $playMode.append('<h3>Guesses made: <span id="guessesMade">0</span></h3>');
       var playerInputs = createPlayerInputs();
       $playMode.append(playerInputs);
       $playMode.append('<button type="submit" id="submitBtn">Submit Guesses</button>');
@@ -110,22 +109,31 @@ function startBtnClicked(){
           data: objToSend
       }).done(function(response){
           console.log('successful response from POST req /number/guesses/', response);
-          //will call function for GET request here
+          //call function for GET request 
+          getResults();
       }).fail(function(error){
           console.log('something went wrong in POST req for /number/guesses/', error);
       });
   } //END submitGuesses
 
-//GET request
-// $.ajax({
-//     method: 'GET',
-//     url: '/number'
-// }).done(function(response){
-//     console.log('SUCCESS');
-//     console.log(response);
-//     //append products to the DOM???
-    
-// }).fail(function(error){
-//     console.log('something went wrong in GET request', error);
-    
-// });
+  //GET request
+  function getResults() {
+      $.ajax({
+          method: 'GET',
+          url: '/number'
+      }).done(function(response){
+          console.log('successful response from GET req to /number', response);
+          //append response to DOM
+          appendResults(response);
+      }).fail(function(error){
+          console.log('something went wrong in GET req to /number', error);
+          
+      });
+  } //END getResults
+
+  function appendResults(guessingResults) {
+      //include $('#guessesMade').text(guessesMade);
+
+  }
+  
+
