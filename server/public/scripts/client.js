@@ -127,13 +127,12 @@ function startBtnClicked(){
           appendResults(response);
       }).fail(function(error){
           console.log('something went wrong in GET req to /number', error);
-          
       });
   } //END getResults
 
   function appendResults(guessingResults) {
       //include $('#guessesMade').text(guessesMade);
-
-  }
+      console.log('in appendResults, being passed:', guessingResults);
+  }//end appendResults
   
 
