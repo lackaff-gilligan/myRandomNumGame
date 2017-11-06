@@ -19,15 +19,18 @@ function onReady(){
 
 //loads the setup mode
 function loadSetUp(){
-    var $setUp = $('<div id="setUp"><p>Pick a Level, then click Start to Play!</p></div>');
-    var $easyBtn = $('<button class="difficulty" id="easy" type="button">EASY</button>');
-    var $medBtn = $('<button class="difficulty" id="medium" type="button">MEDIUM</button>');
-    var $hardBtn = $('<button class="difficulty" id="hard" type="button">HARD</button>');
-    var startGame = $('<button id="start" type="button">START GAME</button>');
+    var $setUp = $('<div id="setUp" class="text-center"><h2>Pick a Level, then click START GAME to play!</h2></div>');
+    var $easyBtn = $('<button class="btn btn-default difficulty" id="easy" type="button">EASY</button>');
+    var $medBtn = $('<button class="btn btn-default difficulty" id="medium" type="button">MEDIUM</button>');
+    var $hardBtn = $('<button class="btn btn-default difficulty" id="hard" type="button">HARD</button>');
+    var startGame = $('<br><button class="btn btn-success" id="start" type="button">START GAME</button>');
+    var $numRange = $('<h3>Number Range: <br><span id="numRange"></span></h3>');
+    
     $setUp.append($easyBtn);
     $setUp.append($medBtn);
     $setUp.append($hardBtn);
     $setUp.append(startGame);
+    $setUp.append($numRange);
     $('.container').append($setUp);
 }
 
@@ -42,6 +45,7 @@ function difficultyLevelPicked(){
     } else if(diffLevel === 'HARD'){
         max = 100;
     }
+    $('#numRange').text('1 to ' + max);
 }
 
 function startBtnClicked(){
@@ -68,15 +72,15 @@ function startBtnClicked(){
 
   //create play mode of game
   function playMode(){
-      var $playMode = $('<div id="playMode"></div>');
+      var $playMode = $('<div class="text-center" id="playMode"></div>');
       $playMode.append('<h2 id="difficultyDisp">Difficulty Level: ' + diffLevel + '</h2>');
       $playMode.append('<h3 id="guessRange">Number is between 1 and ' + max + '</h3>');
       $playMode.append('<h3>Guesses made: <span id="guessesMade">0</span></h3>');
-      $playMode.append('<h2 id="gameMsg">Should this show from start?</h2>');
+      $playMode.append('<h2 id="gameMsg">Good Luck!</h2>');
       var playerInputs = createPlayerInputs();
       $playMode.append(playerInputs);
-      $playMode.append('<button type="submit" id="submitBtn">Submit Guesses</button>');
-      $playMode.append('<button type="button" id="cancelBtn">Cancel Game</button>');
+      $playMode.append('<button type="submit" class="btn btn-default" id="submitBtn">Submit Guesses</button>');
+      $playMode.append('<button type="button" class="btn btn-default" id="cancelBtn">Cancel Game</button>');
    $('.container').append($playMode);
   }
 
@@ -151,6 +155,7 @@ function startBtnClicked(){
       }
   }//end appendResults
   
+  //reset game to setup mode
   function reBoot(){
       $('.container').empty();
       loadSetUp();

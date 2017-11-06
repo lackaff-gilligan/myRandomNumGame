@@ -3,5 +3,9 @@ div {
 }
 
 .difficulty:focus {
-    background-color: green;
+    background-color: lightgreen;
+}
+
+.btn {
+    margin: 5px;
 }
