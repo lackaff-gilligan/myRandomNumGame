@@ -79,18 +79,18 @@ function startBtnClicked(){
       $playMode.append('<h2 id="gameMsg">Good Luck!</h2>');
       var playerInputs = createPlayerInputs();
       $playMode.append(playerInputs);
-      $playMode.append('<button type="submit" class="btn btn-default" id="submitBtn">Submit Guesses</button>');
-      $playMode.append('<button type="button" class="btn btn-default" id="cancelBtn">Cancel Game</button>');
+      $playMode.append('<button type="submit" class="btn btn-success" id="submitBtn">Submit Guesses</button>');
+      $playMode.append('<button type="button" class="btn btn-danger" id="cancelBtn">Cancel Game</button>');
    $('.container').append($playMode);
   }
 
   //create inputs and last guess details for each player's guesses
   function createPlayerInputs(){
       var players = $('<div id="players"></div>');
-      for(var i = 1; i < 5; i += 1){
+      for(var i = 1; i <= 4; i += 1){
        players.append('<label for="input' + i + '">Player ' + i + '</label><br>');
        players.append('<input type="text" id="input' + i + '" class="playerInput">');
-       players.append('<p>Last Guess: <span id="lastGuess' + i + '"></span></p>');
+       players.append('<p>Your last guess was: <span id="lastGuess' + i + '"></span></p>');
       }
       return players;
   }
@@ -151,7 +151,7 @@ function startBtnClicked(){
       $('#guessesMade').text(guessesMade);
       $('#gameMsg').text(dispMsg);
       if($('#gameMsg').text() !== 'GUESS AGAIN!'){
-          $('#players').prepend('<button id="restartBtn">Restart Game</button>');
+          $('#players').prepend('<button id="restartBtn" class="btn btn-default">Restart Game</button><br>');
       }
   }//end appendResults
   
