@@ -13,6 +13,8 @@ function onReady(){
     $('.container').on('click', '.difficulty', difficultyLevelPicked);
     $('.container').on('click', '#start', startBtnClicked);
     $('.container').on('click', '#submitBtn', submitGuesses);
+    $('.container').on('click', '#cancelBtn', reBoot);
+    $('.container').on('click', '#restartBtn', reBoot);
 }
 
 //loads the setup mode
@@ -144,6 +146,13 @@ function startBtnClicked(){
       //update guesses made tracker
       $('#guessesMade').text(guessesMade);
       $('#gameMsg').text(dispMsg);
+      if($('#gameMsg').text() !== 'GUESS AGAIN!'){
+          $('#players').prepend('<button id="restartBtn">Restart Game</button>');
+      }
   }//end appendResults
   
+  function reBoot(){
+      $('.container').empty();
+      loadSetUp();
+  };
 
